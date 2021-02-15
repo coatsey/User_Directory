@@ -1,7 +1,14 @@
-import logo from './logo.svg';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import './App.css';
 
 function App() {
+
+const [userArray, setUserArray] = useState([]);
+
+const [natArray, setNatArray] = useState([]);
+
+const [filteredArray, setFilteredArray] = useState([]);
   return (
     <div className="App">
       <header className="App-header">
