@@ -9,6 +9,26 @@ const [userArray, setUserArray] = useState([]);
 const [natArray, setNatArray] = useState([]);
 
 const [filteredArray, setFilteredArray] = useState([]);
+
+useEffect(() => {
+  axios
+    .get("https://randomuser.me/api/?results=25")
+    .then((response) => {
+      const responseArray = response.data.results;
+      const sortedArray = responseArray.sort((a, b) =>
+        a.name.first.localeCompare(b.name.first)
+      );
+      setUserArray(sortedArray);
+      setFilteredArray(sortedArray);
+
+      const natsArray = Array.from(
+        new Set(sortedArray.map((x) => x.nat))
+      ).sort();
+
+      setNatArray(natsArray);
+    })
+    .catch((err) => console.log(err));
+}, []);
   return (
     <div className="App">
       <header className="App-header">
